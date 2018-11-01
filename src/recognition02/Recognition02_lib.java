@@ -18,14 +18,12 @@ public class Recognition02_lib
 {
 	VisualRecognition service;
 	IamOptions iamOptions;
-	
 
-	
-	Recognition02_lib()
+	public Recognition02_lib()
 	{
 		service = new VisualRecognition("2018-03-19");
 		iamOptions = new IamOptions.Builder()
-		  .apiKey("3o2DMLu44a6YCxp7K5JDzs_DTfm0Fqy0QpjL3Y2pBRe7")
+		  .apiKey("1618101")
 		  .build();
 		service.setIamCredentials(iamOptions);
 	}
@@ -48,7 +46,7 @@ public class Recognition02_lib
 		return result;
 	}
 	
-	public void getJson(DetectedFaces result_ )
+	public void getJson( DetectedFaces result )
 	{
 		int age_min;
 		int age_max;
@@ -59,7 +57,7 @@ public class Recognition02_lib
 		ObjectMapper mapper = new ObjectMapper();
 		node = null;
 		try {
-			node = mapper.readTree(String.valueOf(result_));
+			node = mapper.readTree(String.valueOf(result));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,7 +76,7 @@ public class Recognition02_lib
 		
 		mysql.updateImage(age_min,age_max,age_score,gender,gender_score);
 		
-		System.out.println(result_);	
+		System.out.println(result);	
 		System.out.println("age_min : " + age_min);
 	}
 }
