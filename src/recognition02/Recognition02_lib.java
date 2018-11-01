@@ -22,15 +22,18 @@ public class Recognition02_lib
 	double age_score;
 	int gender;	
 	
-	Recognition02_lib(String flie)
+	Recognition02_lib()
 	{
 		service = new VisualRecognition("2018-03-19");
 		iamOptions = new IamOptions.Builder()
-		  .apiKey("1618101")
+		  .apiKey("3o2DMLu44a6YCxp7K5JDzs_DTfm0Fqy0QpjL3Y2pBRe7")
 		  .build();
 		service.setIamCredentials(iamOptions);
 
-
+	}
+	
+	public void getGender(String flie)
+	{
 		DetectFacesOptions detectFacesOptions = null;
 		try {
 			detectFacesOptions = new DetectFacesOptions.Builder()
@@ -42,10 +45,7 @@ public class Recognition02_lib
 		}
 		
 		result = service.detectFaces(detectFacesOptions).execute();	
-	}
-	
-	public void getGender()
-	{
+		
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode node = null;
 		try {
