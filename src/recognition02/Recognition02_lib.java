@@ -12,28 +12,25 @@ import com.ibm.watson.developer_cloud.visual_recognition.v3.VisualRecognition;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.model.DetectFacesOptions;
 import com.ibm.watson.developer_cloud.visual_recognition.v3.model.DetectedFaces;
 
+import recognition02.MySQL;
+
 public class Recognition02_lib 
 {
 	VisualRecognition service;
 	IamOptions iamOptions;
-	DetectedFaces result;
-	int age_min;
-	int age_max;
-	double age_score;
-	int gender;	
-	JsonNode node;
+	
+
 	
 	Recognition02_lib()
 	{
 		service = new VisualRecognition("2018-03-19");
 		iamOptions = new IamOptions.Builder()
-		  .apiKey("1618101")
+		  .apiKey("3o2DMLu44a6YCxp7K5JDzs_DTfm0Fqy0QpjL3Y2pBRe7")
 		  .build();
 		service.setIamCredentials(iamOptions);
-
 	}
 	
-	public void getRecognition(String flie)
+	public DetectedFaces getRecognition(String flie)
 	{
 		DetectFacesOptions detectFacesOptions = null;
 		try {
@@ -45,20 +42,29 @@ public class Recognition02_lib
 			e.printStackTrace();
 		}
 		
-		result = service.detectFaces(detectFacesOptions).execute();	
+		DetectedFaces result = service.detectFaces(detectFacesOptions).execute();	
 		
+
+		return result;
+	}
+	
+	public void getJson(DetectedFaces result_ )
+	{
+		int age_min;
+		int age_max;
+		double age_score;
+		int gender;	
+		JsonNode node;
+		MySQL mysql = new MySQL();
 		ObjectMapper mapper = new ObjectMapper();
 		node = null;
 		try {
-			node = mapper.readTree(String.valueOf(result));
+			node = mapper.readTree(String.valueOf(result_));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	public void getJson()
-	{
+		
 		age_min = node.get("images").get(0).get("faces").get(0).get("age").get("min").asInt();
 		age_max = node.get("images").get(0).get("faces").get(0).get("age").get("max").asInt();
 		age_score = node.get("images").get(0).get("faces").get(0).get("age").get("score").doubleValue();
@@ -70,7 +76,9 @@ public class Recognition02_lib
 		}
 		double gender_score = node.get("images").get(0).get("faces").get(0).get("gender").get("score").doubleValue();
 		
-		System.out.println(result);	
+		mysql.updateImage(age_min,age_max,age_score,gender,gender_score);
+		
+		System.out.println(result_);	
 		System.out.println("age_min : " + age_min);
 	}
 }

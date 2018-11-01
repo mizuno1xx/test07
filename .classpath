@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="C:/Program Files/eclipse/jar/jackson-databind-2.9.5.jar"/>
 	<classpathentry kind="src" path="img"/>
 	<classpathentry kind="lib" path="C:/Program Files/eclipse/jar/jackson-annotations-2.9.5.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse/jar/mysql-connector-java-5.1.47.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
