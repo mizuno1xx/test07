@@ -23,7 +23,7 @@ public class Recognition02_lib
 	{
 		service = new VisualRecognition("2018-03-19");
 		iamOptions = new IamOptions.Builder()
-		  .apiKey("1618101")
+		  .apiKey("3o2DMLu44a6YCxp7K5JDzs_DTfm0Fqy0QpjL3Y2pBRe7")
 		  .build();
 		service.setIamCredentials(iamOptions);
 	}
@@ -66,10 +66,13 @@ public class Recognition02_lib
 		age_min = node.get("images").get(0).get("faces").get(0).get("age").get("min").asInt();
 		age_max = node.get("images").get(0).get("faces").get(0).get("age").get("max").asInt();
 		age_score = node.get("images").get(0).get("faces").get(0).get("age").get("score").doubleValue();
-
-		if(node.get("images").get(0).get("faces").get(0).get("gender").get("gender").toString() == "MALE") {
+		
+		if("\"MALE\"".equals( node.get("images").get(0).get("faces").get(0).get("gender").get("gender").toString() ) )
+		{
 			gender = 0;
-		}else{
+		}
+		else
+		{
 			gender = 1;
 		}
 		double gender_score = node.get("images").get(0).get("faces").get(0).get("gender").get("score").doubleValue();
