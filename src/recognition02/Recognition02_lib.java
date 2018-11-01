@@ -21,18 +21,19 @@ public class Recognition02_lib
 	int age_max;
 	double age_score;
 	int gender;	
+	JsonNode node;
 	
 	Recognition02_lib()
 	{
 		service = new VisualRecognition("2018-03-19");
 		iamOptions = new IamOptions.Builder()
-		  .apiKey("3o2DMLu44a6YCxp7K5JDzs_DTfm0Fqy0QpjL3Y2pBRe7")
+		  .apiKey("1618101")
 		  .build();
 		service.setIamCredentials(iamOptions);
 
 	}
 	
-	public void getGender(String flie)
+	public void getRecognition(String flie)
 	{
 		DetectFacesOptions detectFacesOptions = null;
 		try {
@@ -47,13 +48,17 @@ public class Recognition02_lib
 		result = service.detectFaces(detectFacesOptions).execute();	
 		
 		ObjectMapper mapper = new ObjectMapper();
-		JsonNode node = null;
+		node = null;
 		try {
 			node = mapper.readTree(String.valueOf(result));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void getJson()
+	{
 		age_min = node.get("images").get(0).get("faces").get(0).get("age").get("min").asInt();
 		age_max = node.get("images").get(0).get("faces").get(0).get("age").get("max").asInt();
 		age_score = node.get("images").get(0).get("faces").get(0).get("age").get("score").doubleValue();
