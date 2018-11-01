@@ -7,5 +7,4 @@ public class Recognition02_main {
 		Recognition02_lib rec_lib = new Recognition02_lib("img\\S__144556041.jpg");
 		rec_lib.getGender();
 	}
-
 }

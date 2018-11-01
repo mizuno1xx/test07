@@ -41,9 +41,7 @@ public class Recognition02_lib
 			e.printStackTrace();
 		}
 		
-		result = service.detectFaces(detectFacesOptions).execute();
-		System.out.println(result);	
-		
+		result = service.detectFaces(detectFacesOptions).execute();	
 	}
 	
 	public void getGender()
@@ -66,6 +64,8 @@ public class Recognition02_lib
 			gender = 1;
 		}
 		double gender_score = node.get("images").get(0).get("faces").get(0).get("gender").get("score").doubleValue();
+		
+		System.out.println(result);	
 		System.out.println("age_min : " + age_min);
 	}
 }
